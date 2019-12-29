@@ -3,7 +3,7 @@
   tasks:
 
    - name: install Docker
-     shell: amazon-linux-extras install docker
+     shell: amazon-linux-extras install -y docker
 
    - name: Restart Docker
      service: 
