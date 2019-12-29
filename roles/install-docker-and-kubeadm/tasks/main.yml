@@ -14,7 +14,7 @@
      yum:
        name: "{{item}}"
        state: present
-       disableexcludes=kubernetes
+       disableexcludes: kubernetes
      with_items:
       - kubelet
       - kubeadm
