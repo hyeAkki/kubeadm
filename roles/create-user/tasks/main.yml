@@ -17,7 +17,7 @@
         validate: 'visudo -cf %s'
 
     - name: Creating pub SSH keys
-      shell: ssh-keygen -N '' -f ~/.ssh/id_rsa -C kube
+      shell: ssh-keygen -N '' -f /home/kube/.ssh/id_rsa -C kube
 
     - name: set up authorized keys for the kube user
       authorized_key: user=kube key="{{item}}"
