@@ -2,19 +2,8 @@
   become: yes
   tasks:
 
-   - name: Add EPEL repository
-     yum:
-       name: epel-release
-       state: present
-
-   - name: Adding repo for kubernetes
-     copy:
-       src: /home/ec2-user/kubeadm/files/kubernetes.repo
-       dest: /etc/yum.repos.d/kubernetes.repo
-       remote_src: yes
-
    - name: install kubectl
      yum:
        name: kubectl
-       state: present
-       force: yes
+       state: latest
+       update_cache: yes
