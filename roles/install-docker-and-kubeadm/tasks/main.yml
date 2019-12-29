@@ -10,10 +10,10 @@
       name: docker
       state: restarted
 
- - name: Create repo file for kubernetes
-   file:
-     path: /etc/yum.repos.d/kubernetes.repo
-     state: touch
+  - name: Create repo file for kubernetes
+    file:
+      path: /etc/yum.repos.d/kubernetes.repo
+      state: touch
 
   - name: Editing repo file for kubernetes
     blockinfile:
