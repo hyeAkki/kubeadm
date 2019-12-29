@@ -2,22 +2,33 @@
   become: yes
   tasks:
 
-   - name: install Docker
-     shell: amazon-linux-extras install -y docker
+  - name: install Docker
+    shell: amazon-linux-extras install -y docker
 
-   - name: Restart Docker
-     service: 
-       name: docker
-       state: restarted
+  - name: Restart Docker
+    service: 
+      name: docker
+      state: restarted
 
-   - name: Adding repo for kubernetes
-     copy:
-       src: /home/ec2-user/kubeadm/files/kubernetes.repo
-       dest: /etc/yum.repos.d/kubernetes.repo
-       remote_src: yes
+ - name: Create repo file for kubernetes
+   file:
+     path: /etc/yum.repos.d/kubernetes.repo
+     state: touch
 
-   - name: install kubelet
-     yum:
-       name: kubelet, kubeadm, kubectl
-       state: present
-       disable_excludes: kubernetes
+  - name: Editing repo file for kubernetes
+    blockinfile:
+      path: /etc/ssh/sshd_config
+      block: |
+        [kubernetes]
+        name=Kubernetes
+        baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        enabled=1
+        gpgcheck=1
+        repo_gpgcheck=1
+        gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg  
+
+  - name: install kubelet
+    yum:
+      name: kubelet, kubeadm, kubectl
+      state: present
+      disable_excludes: kubernetes
