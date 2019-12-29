@@ -17,14 +17,12 @@
         validate: 'visudo -cf %s'
 
     - name: Creating pub SSH keys
-      become_user: kube
-      shell: ssh-keygen -N '' -f ~/.ssh/id_rsa
+      shell: ssh-keygen -N '' -f ~/.ssh/id_rsa -C kube
 
     - name: set up authorized keys for the kube user
-      become_user: kube
       authorized_key: user=kube key="{{item}}"
       with_file:
-        - ~/.ssh/id_rsa.pub
+        - /home/kube/.ssh/id_rsa.pub
 
     - name: Create a Directory /home/kube/logs
       file:
