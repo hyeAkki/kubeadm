@@ -14,4 +14,4 @@
      yum:
        name: kubelet, kubeadm, kubectl
        state: present
-       disableexcludes: kubernetes
+       disable_excludes: kubernetes
