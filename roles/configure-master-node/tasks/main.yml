@@ -29,6 +29,11 @@
         chdir: /home/kube/logs
         creates: configure-master-node2.txt
 
+    - name: Installing git
+      yum:
+        name: git
+        state: latest
+
     - name: download metrics-server from kubernetes-incubator
       become_user: kube
       git:
