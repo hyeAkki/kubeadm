@@ -2,14 +2,6 @@
   become: yes
   tasks:
 
-  - name: install Docker
-    shell: amazon-linux-extras install -y docker
-
-  - name: Restart Docker
-    service: 
-      name: docker
-      state: restarted
-
   - name: Removing repo file for kubernetes
     file:
       path: /etc/yum.repos.d/kubernetes.repo
@@ -35,9 +27,17 @@
   - name: Set SELinux in permissive mode (effectively disabling it)
     shell: sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
-  - name: install kubelet
+  - name: install Docker
+    shell: amazon-linux-extras install -y docker
+
+  - name: Restart Docker
+    service: 
+      name: docker
+      state: restarted
+
+  - name: install kubelet, kubeadm
     yum:
-      name: kubelet, kubeadm, kubectl
+      name: kubelet, kubeadm
       state: latest
       disable_excludes: kubernetes
       update_cache: yes
