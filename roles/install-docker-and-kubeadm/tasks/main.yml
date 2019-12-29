@@ -24,9 +24,46 @@
         repo_gpgcheck=0
         gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg  
 
-  - name: install Docker
-    shell: amazon-linux-extras install -y docker
+  - name: Installing pre-requisites for docker
+    yum:
+      name: yum-utils, device-mapper-persistent-data, lvm2
+      state: latest
+      
+  - name: Adding repo for docker-ce
+    yum_repository: 
+      name: docker-ce
+      baseurl: https://download.docker.com/linux/centos/docker-ce.repo
 
+  - name: Install Docker
+    yum:
+      name: containerd.io*, docker-ce*
+      state: latest
+      update_cache: yes
+      
+  - name: Creating docker config file
+    blockinfile:
+      path: /etc/docker/daemon.json
+      block: |
+        {
+          "exec-opts": ["native.cgroupdriver=systemd"],
+          "log-driver": "json-file",
+          "log-opts": {
+            "max-size": "100m"
+        },
+          "storage-driver": "overlay2",
+          "storage-opts": [
+            "overlay2.override_kernel_check=true"
+          ]
+        }
+        
+  - name: Creating docker service folder
+    file: 
+      path: /etc/systemd/system/docker.service.d
+      state: directory
+      
+  - name: Reloading daemon
+    shell: systemctl daemon-reload
+    
   - name: Restart Docker
     service: 
       name: docker
@@ -40,4 +77,4 @@
       update_cache: yes
 
   - name: Enabling kubelet
-    shell: systemctl enable --now kubelet && systemctl enable docker.service
+    shell: systemctl enable --now kubelet
