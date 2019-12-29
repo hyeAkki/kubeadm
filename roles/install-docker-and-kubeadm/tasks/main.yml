@@ -17,7 +17,7 @@
 
   - name: Editing repo file for kubernetes
     blockinfile:
-      path: /etc/ssh/sshd_config
+      path: /etc/yum.repos.d/kubernetes.repo
       block: |
         [kubernetes]
         name=Kubernetes
