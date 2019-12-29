@@ -30,14 +30,12 @@
   - name: Set SELinux in permissive mode (effectively disabling it)
     shell: sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
-  - name: YUM Update
-    shell: yum update -y
-
   - name: install kubelet
     yum:
       name: kubelet, kubeadm, kubectl
-      state: present
+      state: latest
       disable_excludes: kubernetes
+      update_cache: yes
 
   - name: Enabling kubelet
     shell: systemctl enable --now kubelet
