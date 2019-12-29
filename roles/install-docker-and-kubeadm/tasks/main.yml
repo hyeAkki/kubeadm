@@ -28,7 +28,7 @@
         gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg  
 
   - name: Set SELinux in permissive mode (effectively disabling it)
-    shell: setenforce 0 && sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+    shell: setenforce 0 2&>1 && sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
   - name: install kubelet
     yum:
