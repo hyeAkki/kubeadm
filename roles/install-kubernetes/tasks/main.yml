@@ -1,4 +1,4 @@
-- hosts: nodes
+- hosts: ec2
   become: yes
   tasks:
 

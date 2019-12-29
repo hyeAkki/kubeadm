@@ -1,4 +1,4 @@
-- hosts: master
+- hosts: ec2
   become_user: kube
   tasks:
 
