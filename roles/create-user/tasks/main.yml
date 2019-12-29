@@ -1,4 +1,5 @@
 - hosts: ec2
+  become: yes
   tasks:
 
     - name: create the 'kube' user
