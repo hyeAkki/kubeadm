@@ -21,6 +21,7 @@
       shell: echo y | ssh-keygen -N '' -f ~/.ssh/id_rsa
 
     - name: set up authorized keys for the kube user
+      become_user: kube
       authorized_key: user=kube key="{{item}}"
       with_file:
         - /home/kube/.ssh/id_rsa.pub
