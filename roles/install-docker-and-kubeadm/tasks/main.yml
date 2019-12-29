@@ -27,9 +27,15 @@
         repo_gpgcheck=1
         gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg  
 
+  - name: Set SELinux in permissive mode (effectively disabling it)
+    shell: setenforce 0 && sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
   - name: install kubelet
     yum:
       name: kubelet, kubeadm, kubectl
       state: present
       disable_excludes: kubernetes
       update_cache: true
+
+  - name: Enabling kubelet
+    shell: systemctl enable --now kubelet
