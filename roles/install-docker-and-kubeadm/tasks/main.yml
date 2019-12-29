@@ -40,4 +40,4 @@
       update_cache: yes
 
   - name: Enabling kubelet
-    shell: systemctl enable --now kubelet
+    shell: systemctl enable --now kubelet && systemctl enable docker.service
