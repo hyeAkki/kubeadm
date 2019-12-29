@@ -32,6 +32,7 @@
   - name: Adding repo for docker-ce
     yum_repository: 
       name: docker-ce
+      description: Docker Repo
       baseurl: https://download.docker.com/linux/centos/docker-ce.repo
 
   - name: Install Docker
