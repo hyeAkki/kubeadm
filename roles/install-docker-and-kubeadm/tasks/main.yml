@@ -10,6 +10,12 @@
        name: docker
        state: restarted
 
+   - name: Adding repo for kubernetes
+     copy:
+       src: /home/ec2-user/kubeadm/files/kubernetes.repo
+       dest: /etc/yum.repos.d/kubernetes.repo
+       remote_src: yes
+
    - name: install kubelet
      yum:
        name: kubelet, kubeadm, kubectl

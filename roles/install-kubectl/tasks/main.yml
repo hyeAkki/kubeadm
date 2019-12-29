@@ -7,7 +7,7 @@
        name: epel-release
        state: present
 
-   - name: Copy a "sudoers" file on the remote machine for editing
+   - name: Adding repo for kubernetes
      copy:
        src: /home/ec2-user/kubeadm/files/kubernetes.repo
        dest: /etc/yum.repos.d/kubernetes.repo
