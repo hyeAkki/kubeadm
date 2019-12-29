@@ -32,3 +32,4 @@
       name: kubelet, kubeadm, kubectl
       state: present
       disable_excludes: kubernetes
+      update_cache: true
