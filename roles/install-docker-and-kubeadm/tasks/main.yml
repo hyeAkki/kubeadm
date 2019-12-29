@@ -1,0 +1,21 @@
+- hosts: ec2
+  become: yes
+  tasks:
+
+   - name: install Docker
+     shell: amazon-linux-extras install docker
+
+   - name: Restart Docker
+     service: 
+       name: docker
+       state: restarted
+
+   - name: install kubelet
+     yum:
+       name: "{{item}}"
+       state: present
+       disableexcludes=kubernetes
+     with_items:
+      - kubelet
+      - kubeadm
+      - kubectl
