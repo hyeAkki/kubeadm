@@ -12,10 +12,6 @@
 
    - name: install kubelet
      yum:
-       name: "{{item}}"
+       name: kubelet, kubeadm, kubectl
        state: present
        disableexcludes: kubernetes
-     with_items:
-      - kubelet
-      - kubeadm
-      - kubectl
