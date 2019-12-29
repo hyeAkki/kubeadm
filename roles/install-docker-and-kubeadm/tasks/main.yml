@@ -24,9 +24,6 @@
         repo_gpgcheck=0
         gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg  
 
-  - name: Set SELinux in permissive mode (effectively disabling it)
-    shell: sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
-
   - name: install Docker
     shell: amazon-linux-extras install -y docker
 
