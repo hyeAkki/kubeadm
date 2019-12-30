@@ -4,7 +4,3 @@
 
     - name: join cluster
       shell: 
-      args:
-        chdir: $HOME/logs
-        creates: join-master1.txt
-      ignore_errors: yes

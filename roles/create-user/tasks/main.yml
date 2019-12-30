@@ -16,9 +16,10 @@
         line: 'kube ALL=(ALL) NOPASSWD: ALL'
         validate: 'visudo -cf %s'
 
-    - name: Creating pub SSH keys
-      become_user: kube
-      shell: echo y | ssh-keygen -N '' -f ~/.ssh/id_rsa
+    - name: set up authorized keys for the kube user
+      authorized_key: user=kube key="{{item}}"
+      with_file:
+        - ~/.ssh/id_rsa.pub
 
     - name: Create a Directory /home/kube/logs
       file:

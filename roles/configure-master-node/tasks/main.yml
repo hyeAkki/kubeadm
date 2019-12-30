@@ -24,15 +24,13 @@
 
     - name: install Pod network
       become_user: kube
-      shell: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')" >> configure-master-node2.txt
-      args:
-        chdir: /home/kube/logs
-        creates: configure-master-node2.txt
+      shell: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
     - name: Installing git
-      yum:
+      apt:
         name: git
         state: latest
+        update_cache: true
 
     - name: download metrics-server from kubernetes-incubator
       become_user: kube
@@ -49,7 +47,4 @@
 
     - name: Deploying Metrics-Server for HPA
       become_user: kube
-      shell: kubectl apply -f /home/kube/metrics-server/deploy/1.8+/ >> deploy-metrics-server-for-HPA1.txt
-      args:
-        chdir: $HOME/logs
-        creates: deploy-metrics-server-for-HPA1.txt
+      shell: kubectl apply -f /home/kube/metrics-server/deploy/1.8+/

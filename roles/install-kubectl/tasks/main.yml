@@ -3,7 +3,7 @@
   tasks:
 
    - name: install kubectl
-     yum:
+     apt:
        name: kubectl
        state: latest
        update_cache: yes
