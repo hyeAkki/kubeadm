@@ -1,6 +1,13 @@
 - hosts: ec2
-  become_user: kube
+  become: yes
   tasks:
+
+    - name: download my repo kubernetes
+      become_user: kube
+      git:
+        repo: https://github.com/hiakki/kubernetes.git
+        dest: /home/kube/kubernetes
+      ignore_errors: yes
 
     - name: Get Master Node's IP
       shell: ifconfig eth0 | grep 'inet ' | awk {'print $2'}
@@ -12,17 +19,11 @@
 
     - name: Changing External IP
       replace:
-        path: "{{ item }}"
+        path: /home/kube/kubernetes/php-app/launch.sh
         regexp: 'masterIP'
         replace: " {{ hostvars['master'].set_ip }}"
         backup: yes
-      with_items: 
-        - /home/kube/kubernetes/blue/nginx_php-fpm_multicontainer_service.yaml
-        - /home/kube/kubernetes/green/nginx_php-fpm_multicontainer_service.yaml
 
-    - name: deploying HPA my_app
-      shell: kubectl create -f "{{ item }}"
-      with_items: 
-        - /home/kube/kubernetes/blue/
-        - /home/kube/kubernetes/green/
+    - name: deploying app
+      shell: sh /home/kube/kubernetes/php-app/launch.sh
       ignore_errors: yes
