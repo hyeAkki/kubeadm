@@ -21,4 +21,4 @@
         replace: "{{ansible_host}}"
 
     - name: deploying app
-      shell: sh /home/kube/kubernetes/php-app/launch.sh
+      shell: "sh /home/kube/kubernetes/php-app/launch.sh {{w}}"
