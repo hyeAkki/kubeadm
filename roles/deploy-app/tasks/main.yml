@@ -9,19 +9,11 @@
         dest: /home/kube/kubernetes
       ignore_errors: yes
 
-    - name: Get Master Node's IP
-      shell: ifconfig eth0 | grep 'inet ' | awk {'print $2'}
-      register: get_ip
-
-    - name: Set Master Node's IP
-      set_fact:
-        set_ip: "{{ get_ip.stdout_lines[0] }}"
-
     - name: Changing External IP
       replace:
         path: /home/kube/kubernetes/php-app/launch.sh
         regexp: 'masterIP'
-        replace: " {{ hostvars['master'].set_ip }}"
+        replace: " {{ ansible_host }}"
         backup: yes
 
     - name: deploying app
