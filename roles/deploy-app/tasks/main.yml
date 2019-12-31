@@ -14,8 +14,6 @@
         path: /home/kube/kubernetes/php-app/launch.sh
         regexp: 'masterIP'
         replace: "{{ ansible_host }}"
-        backup: yes
 
     - name: deploying app
       shell: sh /home/kube/kubernetes/php-app/launch.sh
-      ignore_errors: yes
