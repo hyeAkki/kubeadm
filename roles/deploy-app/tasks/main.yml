@@ -3,6 +3,11 @@
   tasks:
 
     - name: download my repo kubernetes
+      file:
+        path: /home/kube/kubernetes
+        state: absent
+
+    - name: download my repo kubernetes
       become_user: kube
       git:
         repo: https://github.com/hiakki/kubernetes.git
@@ -13,7 +18,7 @@
       replace:
         path: /home/kube/kubernetes/php-app/launch.sh
         regexp: 'masterIP'
-        replace: "{{ ansible_host }}"
+        replace: "{{ansible_host}}"
 
     - name: deploying app
       shell: sh /home/kube/kubernetes/php-app/launch.sh
