@@ -28,7 +28,7 @@
 
     - name: Installing git
       apt:
-        name: git
+        name: git, mysql
         state: latest
         update_cache: true
 
