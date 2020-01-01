@@ -26,7 +26,7 @@
       become_user: kube
       shell: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
-    - name: Installing git
+    - name: Installing git and mysql-client
       apt:
         name: git, mysql
         state: latest
