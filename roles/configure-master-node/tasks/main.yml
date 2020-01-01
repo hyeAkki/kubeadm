@@ -28,7 +28,7 @@
 
     - name: Installing git and mysql-client
       apt:
-        name: git, mysql
+        name: git, mysql-client
         state: latest
         update_cache: true
 
