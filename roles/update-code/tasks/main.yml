@@ -22,23 +22,23 @@
     - name: Adding username
       replace:
         path: /home/kube/app/wp-config.php
-        regexp: 'dbnameva'
+        regexp: 'usernameva'
         replace: "{{usernameva}}"
         
     - name: Adding password
       replace:
         path: /home/kube/app/wp-config.php
-        regexp: 'dbnameva'
+        regexp: 'passwordva'
         replace: "{{passwordva}}"
         
     - name: Adding host
       replace:
         path: /home/kube/app/wp-config.php
-        regexp: 'dbnameva'
+        regexp: 'hostva'
         replace: "{{hostva}}"
         
     - name: Adding prefix
       replace:
         path: /home/kube/app/wp-config.php
-        regexp: 'dbnameva'
+        regexp: 'prefixva'
         replace: "{{prefixva}}"
