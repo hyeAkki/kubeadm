@@ -1,6 +1,5 @@
 - hosts: ec2
   become: yes
-  become_user: kube
   tasks:
 
     - name: removing previous app folder
