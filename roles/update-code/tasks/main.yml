@@ -7,7 +7,7 @@
         path: /home/kube/app
         state: absent
 
-    - name: download blue green YAMLs from hiakki/kubernetes
+    - name: download code for tricksvibe
       git:
         repo: https://github.com/hyeAkki/tricksvibe.git
         dest: /home/kube/app
