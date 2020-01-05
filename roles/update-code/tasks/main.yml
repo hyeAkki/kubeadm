@@ -1,0 +1,15 @@
+- hosts: ec2
+  become: yes
+  become_user: kube
+  tasks:
+
+    - name: removing previous app folder
+      file:
+        path: /home/kube/app
+        state: absent
+
+    - name: download blue green YAMLs from hiakki/kubernetes
+      git:
+        repo: https://github.com/hyeAkki/tricksvibe.git
+        dest: /home/kube/app
+      ignore_errors: yes

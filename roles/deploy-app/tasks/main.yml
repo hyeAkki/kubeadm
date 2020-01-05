@@ -2,7 +2,7 @@
   become: yes
   tasks:
 
-    - name: download my repo kubernetes
+    - name: removing previous kubernetes folder
       file:
         path: /home/kube/kubernetes
         state: absent
