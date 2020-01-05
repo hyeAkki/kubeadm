@@ -12,3 +12,33 @@
         repo: https://github.com/hyeAkki/tricksvibe.git
         dest: /home/kube/app
       ignore_errors: yes
+
+    - name: Adding DB name
+      replace:
+        path: /home/kube/app/wp-config.php
+        regexp: 'dbnameva'
+        replace: "{{dbnameva}}"
+        
+    - name: Adding username
+      replace:
+        path: /home/kube/app/wp-config.php
+        regexp: 'dbnameva'
+        replace: "{{usernameva}}"
+        
+    - name: Adding password
+      replace:
+        path: /home/kube/app/wp-config.php
+        regexp: 'dbnameva'
+        replace: "{{passwordva}}"
+        
+    - name: Adding host
+      replace:
+        path: /home/kube/app/wp-config.php
+        regexp: 'dbnameva'
+        replace: "{{hostva}}"
+        
+    - name: Adding prefix
+      replace:
+        path: /home/kube/app/wp-config.php
+        regexp: 'dbnameva'
+        replace: "{{prefixva}}"
