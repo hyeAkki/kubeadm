@@ -42,3 +42,6 @@
         path: /home/kube/app/wp-config.php
         regexp: 'prefixva'
         replace: "{{prefixva}}"
+        
+    - name: Permissions
+      shell: chmod 777 -R /home/kube/app
