@@ -22,4 +22,4 @@
 
     - name: deploying app
       become_user: kube
-      shell: "sh /home/kube/kubernetes/php-app/launch.sh {{w}}"
+      shell: "cd /home/kube/kubernetes/php-app/ && sh launch.sh {{w}}"
