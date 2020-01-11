@@ -4,44 +4,44 @@
 
     - name: removing previous app folder
       file:
-        path: /home/kube/app
+        path: /home/kube/app/tricksvibe
         state: absent
 
     - name: download code for tricksvibe
       git:
         repo: https://github.com/hyeAkki/tricksvibe.git
-        dest: /home/kube/app
+        dest: /home/kube/app/tricksvibe
       ignore_errors: yes
 
     - name: Adding DB name
       replace:
-        path: /home/kube/app/wp-config.php
+        path: /home/kube/app/tricksvibe/wp-config.php
         regexp: 'dbnameva'
         replace: "{{dbnameva}}"
         
     - name: Adding username
       replace:
-        path: /home/kube/app/wp-config.php
+        path: /home/kube/app/tricksvibe/wp-config.php
         regexp: 'usernameva'
         replace: "{{usernameva}}"
         
     - name: Adding password
       replace:
-        path: /home/kube/app/wp-config.php
+        path: /home/kube/app/tricksvibe/wp-config.php
         regexp: 'passwordva'
         replace: "{{passwordva}}"
         
     - name: Adding host
       replace:
-        path: /home/kube/app/wp-config.php
+        path: /home/kube/app/tricksvibe/wp-config.php
         regexp: 'hostva'
         replace: "{{hostva}}"
         
     - name: Adding prefix
       replace:
-        path: /home/kube/app/wp-config.php
+        path: /home/kube/app/tricksvibe/wp-config.php
         regexp: 'prefixva'
         replace: "{{prefixva}}"
         
-    - name: Permissions
-      shell: chmod 777 -R /home/kube/app
+#    - name: Permissions
+#      shell: chmod 777 -R /home/kube/app/tricksvibe
