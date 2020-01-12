@@ -1,0 +1,23 @@
+- hosts: ec2
+  become: yes
+  tasks:
+
+    - name: Install glusterfs-server
+      apt:
+        name: glusterfs-server
+        state: present
+        update_cache: true
+
+    - name: Start glusterfs service
+      service:
+        name: glusterfs
+        state: started
+
+    - name: Adding brick to pool
+      shell: gluster peer probe master
+
+    - name: Creating a volume
+      shell: gluster volume create gvol0 master:/home/kube/app/gvol0/
+
+    - name: Starting Pool Sharing
+      shell: gluster volume start gvol0

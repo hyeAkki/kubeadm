@@ -1,0 +1,17 @@
+- hosts: ec2
+  become: yes
+  tasks:
+
+    - name: Install glusterfs-server
+      apt:
+        name: glusterfs-client
+        state: present
+        update_cache: true
+
+    - name: Create app directory in workers
+      file:
+        path: /home/kube/app/
+        state: directory
+
+    - name: Mounting shared pool to app dir
+      shell: mount -t glusterfs master:/gvol0 /home/kube/app/
