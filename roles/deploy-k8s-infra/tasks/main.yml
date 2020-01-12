@@ -1,7 +1,8 @@
 - hosts: ec2
   become: yes
   tasks:
-
+  gather_facts: no
+  
     - name: Installing pip3
       apt:
         name: python3-pip
