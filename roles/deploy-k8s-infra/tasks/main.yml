@@ -2,6 +2,18 @@
   become: yes
   tasks:
 
+    - name: Removing previous nginx depolyment, HPA, Service and configmap
+      become_user: kube
+      k8s:
+        state: absent
+        src: /home/kube/kubernetes/php-app/{{w}}/{{w}}-nginx/
+
+    - name: Removing previous php depolyment, HPA, Service and configmap
+      become_user: kube
+      k8s:
+        state: absent
+        src: /home/kube/kubernetes/php-app/{{w}}/{{w}}-php/
+
     - name: removing previous kubernetes folder
       file:
         path: /home/kube/kubernetes
