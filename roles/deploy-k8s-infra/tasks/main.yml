@@ -2,6 +2,10 @@
   become: yes
   tasks:
 
+    - name: Installing Openshift for k8s modules
+      pip:
+        name: openshift
+
     - name: Removing previous nginx depolyment, HPA, Service and configmap
       become_user: kube
       k8s:
