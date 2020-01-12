@@ -3,13 +3,13 @@
   gather_facts: no
   tasks:
   
-    - name: Installing pip3
+    - name: Installing pip, pip2 and pip3
       apt:
         name: python3-pip,python-pip
         state: present
         update_cache: yes
 
-    - name: Installing Openshift for k8s modules
+    - name: Installing Openshift and requests for k8s modules
       pip:
         name: openshift,requests
 
