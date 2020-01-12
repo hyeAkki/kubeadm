@@ -11,7 +11,7 @@
 
     - name: Installing Openshift for k8s modules
       pip:
-        name: openshift
+        name: openshift,requests
 
     - name: Removing previous nginx depolyment, HPA, Service and configmap
       become_user: kube
