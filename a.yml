@@ -1,6 +1,0 @@
-- hosts: ec2
-  tasks:
-
-    - name: message
-      debug:
-        msg: hello
