@@ -1,5 +1,16 @@
 - hosts: localhost
+  vars:
+    count: 1
+    name: "prod_tv_{{tag}}"
+    type: t2.medium
+    tag: master
   roles:
-     - { role: launch-ec2-master }
-     - { role: launch-ec2-worker }
-
+     - { role: launch-instances }
+- hosts: localhost
+  vars:
+    count: 2
+    name: "prod_tv_{{tag}}"
+    type: t2.micro
+    tag: worker
+  roles:
+     - { role: launch-instances }

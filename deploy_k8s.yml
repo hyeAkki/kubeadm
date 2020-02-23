@@ -1,0 +1,18 @@
+- hosts: "tag_nodes_all"
+  become: yes
+  roles:
+     - { role: create-user }
+     - { role: install-docker-and-kubeadm }
+- hosts: "tag_node_master"
+  become: yes
+  roles:
+     - { role: install-kubectl }
+     - { role: configure-master-node }
+     - { role: get-token }
+- hosts: "tag_node_worker"
+  become: yes
+  vars_prompt:
+    - name: "join_command"
+      prompt: "Enter Token"
+  roles:
+     - { role: join-master }

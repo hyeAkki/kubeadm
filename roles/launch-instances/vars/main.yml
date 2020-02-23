@@ -1,0 +1,10 @@
+---
+
+#name: prod_tv_master
+region: us-east-2
+ami: ami-0fc20dd1da406780b
+#type: t2.micro
+#count: 1
+subnet: subnet-0b6002c2d443fcf15
+sgn: launch-wizard-1
+keypair: my

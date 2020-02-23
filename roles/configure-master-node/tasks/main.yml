@@ -1,27 +1,25 @@
-- hosts: ec2
-  become: yes
-  tasks:
+---
 
-    - name: Changing Hostname to master
-      replace:
-        path: /etc/hostname
-        regexp: '.*$'
-        replace: master
-      register: reboot_req
+#    - name: Changing Hostname to master
+#      replace:
+#        path: /etc/hostname
+#        regexp: '.*$'
+#        replace: master
+#      register: reboot_req
 
-    - name: Reboot immediately if there was a change in reboot_req.
-      shell: "sleep 5 && reboot"
-      async: 1
-      poll: 0
-      when: reboot_req is changed
-	  
-    - name: Wait for the reboot to complete if there was a change in reboot_req.
-      wait_for_connection:
-        connect_timeout: 20
-        sleep: 5
-        delay: 5
-        timeout: 300
-      when: reboot_req is changed
+#    - name: Reboot immediately if there was a change in reboot_req.
+#      shell: "sleep 5 && reboot"
+#      async: 1
+#      poll: 0
+#      when: reboot_req is changed
+
+#    - name: Wait for the reboot to complete if there was a change in reboot_req.
+#      wait_for_connection:
+#        connect_timeout: 20
+#        sleep: 5
+#        delay: 5
+#        timeout: 300
+#      when: reboot_req is changed
 
     - name: initialize the cluster
       shell: kubeadm init >> configure-master-node1.txt
@@ -60,12 +58,12 @@
         dest: /home/kube/metrics-server
       ignore_errors: yes
 
-    - name: download metrics-server-deployment.yaml from my repo
-      become_user: kube
-      get_url:
-        url: https://raw.githubusercontent.com/hiakki/kubernetes/master/metrics-server/metrics-server-deployment.yaml
-        dest: /home/kube/metrics-server/deploy/1.8+/
+#    - name: download metrics-server-deployment.yaml from my repo
+#      become_user: kube
+#      get_url:
+#        url: https://raw.githubusercontent.com/hiakki/kubernetes/master/metrics-server/metrics-server-deployment.yaml
+#        dest: /home/kube/metrics-server/deploy/1.8+/
 
     - name: Deploying Metrics-Server for HPA
       become_user: kube
-      shell: kubectl apply -f /home/kube/metrics-server/deploy/1.8+/
+      shell: kubectl apply -f /home/kube/metrics-server/deploy/kubernetes/

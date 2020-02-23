@@ -1,6 +1,4 @@
-- hosts: ec2
-  become: yes
-  tasks:
+---
 
    - name: install remote apt deps
      apt:

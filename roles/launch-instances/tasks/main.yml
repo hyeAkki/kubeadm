@@ -1,5 +1,5 @@
 ---
-
+  
     - name: Create an ec2 instance
       ec2:
          key_name: "{{ keypair }}"
@@ -13,6 +13,18 @@
 #            Name: "{{ name }}"
          instance_tags:
             Name: "{{ name }}"
+            node: "{{ tag }}"
+            nodes: all
          vpc_subnet_id: "{{ subnet }}"
          assign_public_ip: yes
-      register: ec2
+      register: ec2_metadata
+
+#    - debug: msg="{{ ec2_metadata.instances }}"
+
+    - debug: msg="{{ ec2_metadata.instances[0].public_ip }}"
+
+    - debug: msg="{{ ec2_metadata.instances[0].private_ip }}"
+
+    - name: Wait till it is launching
+      wait_for:
+        timeout: 30
