@@ -11,7 +11,9 @@
 Usage:
 
 1. Launches instances only
+
 ansible-playbook -i ec2.py -u ubuntu launch_instances.yml
 
 2. Installs all required packages and their dependancy
+
 ansible-playbook -i ec2.py -u ubuntu deploy_k8s.yml
